@@ -6,18 +6,21 @@ public class PlayerMovement : MonoBehaviour
 {
     public float speed;
     public int points = 0;
-    // Start is called before the first frame update
+    public bool isGameActive;
+
     void Start()
     {
-        
+        isGameActive = true;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        float horizontal = Input.GetAxis("Horizontal");
-        float vertical = Input.GetAxis("Vertical");
+        if (isGameActive)
+        {
+            float horizontal = Input.GetAxis("Horizontal");
+            float vertical = Input.GetAxis("Vertical");
 
-        transform.position += new Vector3(horizontal * speed * Time.deltaTime, 0, vertical * speed * Time.deltaTime);
+            transform.position += new Vector3(horizontal * speed * Time.deltaTime, 0, vertical * speed * Time.deltaTime);
+        }
     }
 }

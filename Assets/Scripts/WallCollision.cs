@@ -4,27 +4,19 @@ using UnityEngine;
 
 public class WallCollision : MonoBehaviour
 {
-    public GameObject player;
-    private int points;
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] GameObject door;
+    private bool isActivated;
+
+    private void OnTriggerEnter(Collider other)
     {
-        
-    }
+        if  (!isActivated)
+        {
+            this.gameObject.GetComponent<Renderer>().material.color = Color.yellow;
+            this.gameObject.GetComponent<Light>().enabled = true;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+            door.gameObject.GetComponent<Door>().keyActivated += 1;
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        player.GetComponent<PlayerMovement>().points += 1;
-        points = player.GetComponent<PlayerMovement>().points;
-
-        this.gameObject.GetComponent<Renderer>().material.color = Color.red;
-
-        Debug.Log("Masz "+points+" punkty");
+            isActivated = true;
+        }
     }
 }
